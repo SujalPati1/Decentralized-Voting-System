@@ -1,9 +1,14 @@
+# Use Java 24 base image
 FROM eclipse-temurin:24-jdk
 
-LABEL maintainer="Sujal Patil"
-
+# Set working directory
 WORKDIR /app
 
-COPY target/*.jar app.jar
+# Copy project source files
+COPY . .
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Build the JAR file inside the Docker container
+RUN ./mvnw clean package -DskipTests
+
+# Run the app
+ENTRYPOINT ["java", "-jar", "target/blockvote-0.0.1-SNAPSHOT.jar"]
