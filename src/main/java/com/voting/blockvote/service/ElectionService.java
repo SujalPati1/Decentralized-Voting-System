@@ -18,8 +18,16 @@ public class ElectionService {
     private final ElectionRepository electionRepository;
 
     public ElectionResponse createElection(CreateElectionRequest request){
+        if(request==null){
+            throw new IllegalArgumentException("Request cannot be null");
+        }
+
         if(request.getEndTime().isBefore(request.getStartTime())){
             throw new IllegalArgumentException("End time must be before start time");
+        }
+
+        if(request.getTitle()==null || request.getTitle().isEmpty()){
+            throw new IllegalArgumentException("Title cannot be empty");
         }
 
         Election election = Election.builder()

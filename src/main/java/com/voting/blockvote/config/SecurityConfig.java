@@ -31,11 +31,11 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthFilter jwtAuthFilter) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                    .requestMatchers("/api/auth/**").permitAll()
+                    .requestMatchers("/","/api/auth/**").permitAll()
                     .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session

@@ -19,4 +19,6 @@ public class TestController {
     public String adminOnly(){
         return "admin";
     }
+
+
 }
