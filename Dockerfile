@@ -4,10 +4,13 @@ FROM eclipse-temurin:24-jdk
 # Set working directory
 WORKDIR /app
 
-# Copy project source files
+# Copy project files
 COPY . .
 
-# Build the JAR file inside the Docker container
+#Grant execute permission to mvnw script
+RUN chmod +x mvnw
+
+# Build the JAR file
 RUN ./mvnw clean package -DskipTests
 
 # Run the app
